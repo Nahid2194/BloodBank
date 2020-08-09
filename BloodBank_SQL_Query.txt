@@ -1,0 +1,85 @@
+Q-1. Write an SQL query to fetch name from Donor table.
+SQL> SELECT DNAME FROM DONOR;
+Q2. Write an SQL query to  fetch  name from Donor Table those address Munshiganj.
+SELECT DNAME FROM DONOR WHERE DADDRESS = 'Munshiganj';
+
+Q3. Write an SQL query find total number of donor from Donor table.
+SELECT COUNT(DID) AS Total_No_Donor FROM DONOR;
+
+Q4. Write an SQL Query to find all details of Donor those age less than 20 years.
+SQL> SELECT *FROM DONOR WHERE AGE <20;
+
+Q5.Write an SQL Query to find donor name those Blood type A+;
+
+SQL> select dname from donor where did in
+(select d_id from blood where btype = 'A+');
+
+SQL> SELECT DONOR.DNAME FROM DONOR
+  2  INNER JOIN BLOOD ON
+  3  DONOR.DID = BLOOD.D_ID
+  4  WHERE BTYPE = 'A+';
+Q6.write an sql query to find total number of receptionist.
+
+SQL> SELECT COUNT(EMPID) AS Total_No_Reciptionist FROM RECEPTIONIST;
+
+Q7.Write an SQL Query to find average cost each blood .
+
+SQL> SELECT DISTINCT BTYPE, AVG(COST) FROM blood GROUP BY BTYPE;
+
+
+Q8.WRITE an SQL Query to find Receptionist name who takes B+ blood from the donor.
+
+SQL> SELECT RNAME FROM RECEPTIONIST WHERE EMPID IN
+  2  (SELECT EMP_ID FROM DONOR WHERE DID IN 
+( SELECT D_ID FROM BLOOD WHERE BTYPE = 'B+'));
+
+Q9. Write an SQL Query to find how many types of blood are stock in BloodBank.
+SQL> SELECT DISTINCT BLOODTYPE FROM BLOODBANK;
+
+Q10.Write an SQL Query to find Hospital Name that orders blood from BloodBank id 2.
+SQL> SELECT HNAME FROM HOSPITAL WHERE HID IN 
+(SELECT HOSPITALID FROM ORDERS WHERE B_NO = 2); 
+
+Q11. Write an SQL Query to find BloodType  highest price of blood from Blood table.
+
+SQL> SELECT BTYPE FROM BLOOD WHERE COST IN (SELECT MAX(COST) FROM BLOOD);
+ 
+Q12. Write an SQL Query to find BloodType  lowest price of blood from Blood table.
+
+SQL> SELECT BTYPE FROM BLOOD WHERE COST IN (SELECT MAX(COST) FROM BLOOD);
+
+Q13. Write an sql query to find hospital Name that hospital orders blood.
+
+SQL> SELECT HNAME FROM HOSPITAL WHERE HID IN ( SELECT DISTINCT  HOSPITALID FROM ORDERS);
+
+SQL> SELECT HOSPITAL.HNAME FROM HOSPITAL
+  2  INNER JOIN ORDERS ON
+  3  HOSPITAL.HID = ORDERS.HOSPITALID;
+
+
+Q14. Write an SQL Query to find total numbers of manager .
+
+SQL> SELECT COUNT(MID) FROM BloodBankManager;
+
+Q15.Write an SQL Query to find Manager Name from Blood Bank Manager.
+
+SQL> SELECT MNAME FROM BloodBankManager;
+
+Q16.Write an SQL Query to find BloodType Under the Manger id 1000.
+
+SQL> SELECT BLOODBANK.BLOODTYPE FROM BLOODBANK
+  2  INNER JOIN BLOODBANKMANAGER ON
+  3  BLOODBANK.M_ID = BLOODBANKMANAGER.MID
+  4  WHERE MID = 1000;
+
+
+Q17.Write an SQL Query to find ManagerName who's under B+ Blood.
+
+
+SQL> SELECT *FROM BloodBankManager WHERE MID IN
+  2  (SELECT M_ID FROM BLOODBANK WHERE BLOODTYPE ='B+');
+
+
+
+
+
