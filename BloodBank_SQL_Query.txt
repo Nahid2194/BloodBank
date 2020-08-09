@@ -79,6 +79,44 @@ Q17.Write an SQL Query to find ManagerName who's under B+ Blood.
 SQL> SELECT *FROM BloodBankManager WHERE MID IN
   2  (SELECT M_ID FROM BLOODBANK WHERE BLOODTYPE ='B+');
 
+Q18. Write an SQL Query to find Name  of receptionist who has deposited blood in the blood bank.
+
+
+SQL> SELECT RNAME FROM RECEPTIONIST WHERE EMPID IN
+  2  (SELECT DISTINCT EM_PID FROM BLOODBANK); 
+
+Q19.Write an SQL Query to find All details  of receptionist who's address Munshiganj.
+
+SQL> SELECT *FROM RECEPTIONIST WHERE RADDRESS = 'Munshiganj';
+
+Q20. .Write an SQL Query to find HospitalName that hospital has not yet ordered Blood.
+
+SQL> SELECT HNAME FROM HOSPITAL WHERE HID NOT IN
+  2  (SELECT HOSPITALID FROM ORDERS);
+
+Q21.Write an SQL Query TO Describe Order Details.
+SQL> describe orders;
+
+Q22. write an SQL Query inner join in Donor and Blood.
+
+SQL> SELECT *FROM DONOR
+  2  INNER JOIN BLOOD ON
+  3  DONOR.DID = BLOOD.D_ID;
+
+Q23. Write an SQL Query to find  Phone Number from donor who's blood type AB+.
+
+SQL> SELECT PHONE FROM DONOR WHERE DID IN
+  2  (SELECT D_ID FROM BLOOD WHERE BTYPE = 'AB+');
+
+Q24.Write an SQL Query to find TOTAL NUMBER OF BLOOD BANK .
+SQL> SELECT COUNT(BNO) AS Total_no_Blood_Bank FROM BLOODBANK;
+
+Q25.WRITE an SQL Query to find total number of Hospital in Munshiganj.
+
+SQL> SELECT count(HID)from HOSPITAL WHERE HADDRESS ='Munshiganj';
+ 
+
+
 
 
 
