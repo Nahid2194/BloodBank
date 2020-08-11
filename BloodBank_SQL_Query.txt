@@ -114,6 +114,33 @@ SQL> SELECT COUNT(BNO) AS Total_no_Blood_Bank FROM BLOODBANK;
 Q25.WRITE an SQL Query to find total number of Hospital in Munshiganj.
 
 SQL> SELECT count(HID)from HOSPITAL WHERE HADDRESS ='Munshiganj';
+
+Q26.Write an SQL query to fetch duplicate records having matching data in some fields of a DONOR table.
+
+SQL> SELECT DNAME,PHONE,GENDER ,COUNT(*)
+  2  FROM DONOR
+  3  GROUP BY DNAME ,PHONE,GENDER
+  4  HAVING COUNT(*) >1;
+
+Q27.WRITE an SQL Query to find A- Blood from Blood Bank and Donor details.
+SQL> Select *from Donor Where did in
+  2  (select D_ID from Blood where B_NO in ( select BNO from BloodBank
+  3  where BloodType = 'A-'));
+
+Q28.WRITE an SQL Query to find how many type of blood donote still now.
+
+SQL> Select   count(Distinct Bloodtype) as Type_of_Blood from bloodbank;
+
+Q29.WRITE an SQL Query to find How many times to orders blood each hospital.
+
+SQL> Select hospital.Hname, count(orders.B_NO) from Hospital
+  2  inner join orders on
+  3  hospital.hid = orders.HOSPITALID
+  4  group by Hname;
+
+Q30.Write an Sql Query to Insert another types of blood in Blood Table.
+INSERT INTO BLOOD VALUES(114,'A-',350,4,1);
+INSERT INTO BLOOD VALUES(115,'O+',500,5,2);
  
 
 
